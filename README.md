@@ -1,0 +1,1 @@
+Additional scripts and data used for some of the analyses in: Chandler M, Meek MH, Belote RT. (in prep). Modeling oil and gas development potential to identify conservation risks and opportunities in the western United States.
