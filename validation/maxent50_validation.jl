@@ -1,6 +1,6 @@
 # Mitchell Chandler
 # mitchell_chandler@tws.org
-# Last updated: 06-March-2026
+# Last updated: 23-August-2026
 ##################################################
 
 #import Pkg
@@ -38,12 +38,12 @@ f = Figure(fontsize=16);
 ax = Axis(f[1, 1],xlabel="Distance [km]",ylabel="Moran's I", 
     xminorticks=IntervalsBetween(5),xminorticksvisible=false,xgridvisible=false,ygridvisible=false,xminorgridvisible=false)
 hlines!(0,color=:black,linewidth=1)
-lines!(dist/1000,I_CA,linewidth=4,label="California",color=Makie.to_colormap(:Dark2_7)[1])
-lines!(dist/1000,I_CO,linewidth=4,label="Colorado",color=Makie.to_colormap(:Dark2_7)[2])
-lines!(dist/1000,I_MT,linewidth=4,label="Montana",color=Makie.to_colormap(:Dark2_7)[3])
-lines!(dist/1000,I_NM,linewidth=4,label="New Mexico",color=Makie.to_colormap(:Dark2_7)[5])
-lines!(dist/1000,I_UT,linewidth=4,label="Utah",color=Makie.to_colormap(:Dark2_7)[6])
-lines!(dist/1000,I_WY,linewidth=4,label="Wyoming",color=Makie.to_colormap(:Dark2_7)[7])
+lines!(dist/1000,I_CA,linewidth=4,label="California",color="#4477AA")
+lines!(dist/1000,I_CO,linewidth=4,label="Colorado",color="#EE6677")
+lines!(dist/1000,I_MT,linewidth=4,label="Montana",color="#228833")
+lines!(dist/1000,I_NM,linewidth=4,label="New Mexico",color="#CCBB44")
+lines!(dist/1000,I_UT,linewidth=4,label="Utah",color="#66CCEE")
+lines!(dist/1000,I_WY,linewidth=4,label="Wyoming",color="#AA3377")
 #axis:
 xlims!(0,300)
 ylims!(-0.1,1)
@@ -52,7 +52,7 @@ ax.xticks=0:50:300;
 #legend:
 f[1,2] = Legend(f,ax,framevisible=true,backgroundcolor=:white,framecolor=:white)
 display(f)
-#save("C:/Users/MitchellChandler/OneDrive - THE WILDERNESS SOCIETY/OGDP model/Figures/spatial_autocorrelogram-2026.03.06.pdf",f)
+#save("C:/Users/MitchellChandler/OneDrive - THE WILDERNESS SOCIETY/OGDP model/Figures/spatial_autocorrelogram-2026.08.23.pdf",f)
 
 #find minimum distance that spatial autocorrelation for all states is less than or equal to a given Moran's I
 I = 0.1;
@@ -213,7 +213,7 @@ ax1 = Axis(f[1, 1],ylabel="Omission Rate",
     xgridvisible=true,ygridvisible=true,
     xminorgridvisible=true,yminorgridvisible=true,
     yticksmirrored=true)
-plot_state_omission(prob_threshold,"California",CA_test_omission,CA_test_p,Makie.to_colormap(:Dark2_7)[1],"(a) CA")
+plot_state_omission(prob_threshold,"California",CA_test_omission,CA_test_p,"#4477AA","(a) CA")
 #axis:
 ax1.xticks=0:0.5:1;
 ax1.yticks=0:0.2:1;
@@ -226,7 +226,7 @@ ax2 = Axis(f[1, 2],
     xminorgridvisible=true,yminorgridvisible=true,
     yticklabelsvisible=false,
     yticksmirrored=true)
-plot_state_omission(prob_threshold,"Colorado",CO_test_omission,CO_test_p,Makie.to_colormap(:Dark2_7)[2],"(b) CO")
+plot_state_omission(prob_threshold,"Colorado",CO_test_omission,CO_test_p,"#EE6677","(b) CO")
 #axis:
 ax2.xticks=0:0.5:1;
 ax2.yticks=0:0.2:1;
@@ -239,7 +239,7 @@ ax3 = Axis(f[1, 3],
     xminorgridvisible=true,yminorgridvisible=true,
     yticklabelsvisible=false,
     yticksmirrored=false)
-plot_state_omission(prob_threshold,"Montana",MT_test_omission,MT_test_p,Makie.to_colormap(:Dark2_7)[3],"(c) MT")
+plot_state_omission(prob_threshold,"Montana",MT_test_omission,MT_test_p,"#228833","(c) MT")
 #axis:
 ax3.xticks=0:0.5:1;
 ax3.yticks=0:0.2:1;
@@ -252,7 +252,7 @@ ax5 = Axis(f[2, 1],ylabel="Omission Rate",
     xgridvisible=true,ygridvisible=true,
     xminorgridvisible=true,yminorgridvisible=true,
     yticksmirrored=true)
-plot_state_omission(prob_threshold,"New Mexico",NM_test_omission,NM_test_p,Makie.to_colormap(:Dark2_7)[5],"(d) NM")
+plot_state_omission(prob_threshold,"New Mexico",NM_test_omission,NM_test_p,"#CCBB44","(d) NM")
 #axis:
 ax5.xticks=0:0.5:1;
 ax5.yticks=0:0.2:1;
@@ -265,7 +265,7 @@ ax6 = Axis(f[2, 2],xlabel="Probability",
     xminorgridvisible=true,yminorgridvisible=true,
     yticklabelsvisible=false,
     yticksmirrored=true)
-plot_state_omission(prob_threshold,"Utah",UT_test_omission,UT_test_p,Makie.to_colormap(:Dark2_7)[6],"(e) UT")
+plot_state_omission(prob_threshold,"Utah",UT_test_omission,UT_test_p,"#66CCEE","(e) UT")
 #axis:
 ax6.xticks=0:0.5:1;
 ax6.yticks=0:0.2:1;
@@ -278,13 +278,13 @@ ax7 = Axis(f[2, 3],xlabel="Probability",
     xminorgridvisible=true,yminorgridvisible=true,
     yticklabelsvisible=false,
     yticksmirrored=false)
-plot_state_omission(prob_threshold,"Wyoming",WY_test_omission,WY_test_p,Makie.to_colormap(:Dark2_7)[7],"(f) WY")
+plot_state_omission(prob_threshold,"Wyoming",WY_test_omission,WY_test_p,"#AA3377","(f) WY")
 #axis:
 ax7.xticks=0:0.5:1;
 ax7.yticks=0:0.2:1;
 
 display(f)
-#save("C:/Users/MitchellChandler/OneDrive - THE WILDERNESS SOCIETY/OGDP model/Figures/testing_omission-2026.01.05.pdf",f)
+#save("C:/Users/MitchellChandler/OneDrive - THE WILDERNESS SOCIETY/OGDP model/Figures/testing_omission-2026.08.23.pdf",f)
 
 ##
 # OMISSION RATE AND AUC OF OGDP COMPOSITE #

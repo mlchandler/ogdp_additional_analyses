@@ -1,6 +1,6 @@
 # Mitchell Chandler
 # mitchell_chandler@tws.org
-# Last updated: 06-March-2026
+# Last updated: 23-August-2026
 ##################################################
 
 using CairoMakie
@@ -52,12 +52,12 @@ WY_mag, WY_iso, WY_bou, WY_bed, WY_top, WY_lit = read_rc("WY50_rc.csv"); #WY
 
 function plot_rc(CA,CO,MT,NM,UT,WY)
     #response curves:
-    lines!(CA[:,1],CA[:,2],linewidth=3,label="California",color=Makie.to_colormap(:Dark2_7)[1])
-    lines!(CO[:,1],CO[:,2],linewidth=3,label="Colorado",color=Makie.to_colormap(:Dark2_7)[2])
-    lines!(MT[:,1],MT[:,2],linewidth=3,label="Montana",color=Makie.to_colormap(:Dark2_7)[3])
-    lines!(NM[:,1],NM[:,2],linewidth=3,label="New Mexico",color=Makie.to_colormap(:Dark2_7)[5])
-    lines!(UT[:,1],UT[:,2],linewidth=3,label="Utah",color=Makie.to_colormap(:Dark2_7)[6])
-    lines!(WY[:,1],WY[:,2],linewidth=3,label="Wyoming",color=Makie.to_colormap(:Dark2_7)[7])
+    lines!(CA[:,1],CA[:,2],linewidth=3,label="California",color="#4477AA")
+    lines!(CO[:,1],CO[:,2],linewidth=3,label="Colorado",color="#EE6677")
+    lines!(MT[:,1],MT[:,2],linewidth=3,label="Montana",color="#228833")
+    lines!(NM[:,1],NM[:,2],linewidth=3,label="New Mexico",color="#CCBB44")
+    lines!(UT[:,1],UT[:,2],linewidth=3,label="Utah",color="#66CCEE")
+    lines!(WY[:,1],WY[:,2],linewidth=3,label="Wyoming",color="#AA3377")
     #axis:
     ylims!(0,1)
     ax.yticks=0:0.2:1;
@@ -101,7 +101,7 @@ plot_rc(CA_top,CO_top,MT_top,NM_top,UT_top,WY_top)
 #legend:
 f[2,3] = Legend(f,ax,framevisible=true,backgroundcolor=:white,framecolor=:white,tellwidth=false)
 display(f)
-#save("C:/Users/MitchellChandler/OneDrive - THE WILDERNESS SOCIETY/OGDP model/Figures/continuous_response_curve-2026.03.06.pdf",f)
+#save("C:/Users/MitchellChandler/OneDrive - THE WILDERNESS SOCIETY/OGDP model/Figures/continuous_response_curve-2026.08.23.pdf",f)
 
 ##################################################
 ## PLOT CATEGORICAL ##
@@ -132,8 +132,9 @@ add_lit(WY_lit,6)
 lit = (cat = repeat(1:length(lit_names),outer=num_state),
     state = repeat(1:num_state,inner=length(lit_names)),
     prob = lit_prob[:],
-    colour = repeat([1,2,3,5,6,7],inner=length(lit_names))
 );
+
+cmap_pt = ["#4477AA", "#EE6677", "#228833", "#CCBB44", "#66CCEE", "#AA3377"] #colour-blind safe colourmap
 
 #Plot
 f = Figure(fontsize=fsize);
@@ -141,7 +142,7 @@ ax = Axis(f[1, 1],ylabel="Probability of Presence",
     xticks=(1:length(lit_names),lit_names),
     xticklabelrotation=-pi/5,
     xgridvisible=false,ygridvisible=false)
-barplot!(lit.cat,lit.prob,dodge=lit.state,color=Makie.to_colormap(:Dark2_7)[lit.colour])
+barplot!(lit.cat,lit.prob,dodge=lit.state,color=cmap_pt[lit.state])
 vlines!(collect(0.5:length(lit_names)+1),linewidth=1,linestyle=:dot,color=:grey50)
     #axis:
 ylims!(0,1)
@@ -149,7 +150,7 @@ ax.yticks=0:0.1:1;
 xlims!(0.5,length(lit_names)+0.5)
     #legend:
 labels = ["California","Colorado","Montana","New Mexico","Utah","Wyoming"];
-elements = [PolyElement(polycolor = Makie.to_colormap(:Dark2_7)[i]) for i in [1,2,3,5,6,7]]
+elements = [PolyElement(polycolor = cmap_pt[i]) for i in [1,2,3,4,5,6]]
 Legend(f[1,2],elements,labels,framevisible=false)
 display(f)
-#save("C:/Users/MitchellChandler/OneDrive - THE WILDERNESS SOCIETY/OGDP model/Figures/categorical_response_curve-2026.01.05.pdf",f)
+#save("C:/Users/MitchellChandler/OneDrive - THE WILDERNESS SOCIETY/OGDP model/Figures/categorical_response_curve-2026.08.23.pdf",f)
